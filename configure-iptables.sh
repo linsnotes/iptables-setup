@@ -81,7 +81,13 @@ iptables -A OUTPUT -o lo -j ACCEPT
 # Allow established and related connections
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-# Allow SSH traffic (port 22)
+# Track new SSH connection attempts and add source IP to the "SSH" recent list
+iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH
+
+# Drop packets if the source IP has made more than 3 connection attempts within the last 60 seconds
+iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 4 --name SSH -j DROP
+
+# Allow SSH connections if they do not exceed the rate limit
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 
 # Optional: Allow HTTP traffic (port 80)
