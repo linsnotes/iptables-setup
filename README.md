@@ -16,7 +16,7 @@ This script configures iptables rules to secure a Linux system by setting defaul
    Save the script to a file, e.g., `configure-iptables.sh`.
 
    ```bash
-   wget https://github.com/linsnotes/iptables-setup/blob/main/configure-iptables.sh.sh
+   wget https://github.com/linsnotes/iptables-setup/blob/main/configure-iptables.sh
    ```
 
 2. **Make the Script Executable**
