@@ -37,7 +37,7 @@ This script configures iptables rules to secure a Linux system by setting defaul
   - Drops all incoming and forwarding traffic.
   - Allows outgoing traffic.
 - Allows loopback traffic and established/related connections.
-- Allows SSH traffic (port 22).
+- Limit SSH brute force attacks to 3 attempts per minute, blocking the 4th, and allow legitimate SSH traffic on port 22.
 - Optional rules for HTTP (port 80), HTTPS (port 443), custom application traffic (port 8080), and ICMP (ping) requests.
 - Logs dropped packets with rate limiting.
 - Prompts for installing `iptables-persistent` or `iptables-services` if not already installed.
