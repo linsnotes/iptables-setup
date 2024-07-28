@@ -110,7 +110,7 @@ fi
 
 echo "iptables rules configured and saved."
 echo "To verify if the rules are correctly set, run the following command:"
-echo "  iptables -L -v"
+echo "  sudo iptables -L -v"
 echo "If you reboot your system, run the same command again to ensure the rules are still in place."
 echo "To reset iptables to the default settings, run the following commands in order:"
 echo "  sudo iptables -F"
