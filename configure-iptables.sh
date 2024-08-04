@@ -44,13 +44,19 @@ install_persistent() {
 
 # Check if the system is Debian-based and if iptables-persistent is installed
 if [ -x "$(command -v dpkg-query)" ]; then
-  if ! dpkg-query -W -f='${Status}' iptables-persistent 2>/dev/null | grep -q "ok installed"; then
+  echo "Detected Debian-based system."
+  if dpkg-query -W -f='${Status}' iptables-persistent 2>/dev/null | grep -q "ok installed"; then
+    echo "iptables-persistent is already installed."
+  else
     install_persistent
   fi
   SYSTEM="debian"
-# If not Debian-based, check if the system is CentOS/RHEL and if iptables-services is installed
+# Check if the system is CentOS/RHEL-based and if iptables-services is installed
 elif [ -x "$(command -v rpm)" ]; then
-  if ! rpm -q iptables-services >/dev/null 2>&1; then
+  echo "Detected CentOS/RHEL-based system."
+  if rpm -q iptables-services >/dev/null 2>&1; then
+    echo "iptables-services is already installed."
+  else
     install_persistent
   fi
   SYSTEM="redhat"
