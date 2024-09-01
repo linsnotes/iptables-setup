@@ -85,7 +85,7 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
 # Allow established and related connections
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 
 # Track new SSH connection attempts and add source IP to the "SSH" recent list
 iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --set --name SSH
