@@ -96,6 +96,12 @@ iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --se
 # Allow SSH connections if they do not exceed the rate limit
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 
+# Allow WireGuard clients to access DNS server 192.168.x.x
+# iptables -A FORWARD -i wg0 -d 192.168.x.x -p tcp --dport 53 -j ACCEPT
+# iptables -A FORWARD -i wg0 -d 192.168.x.x -p udp --dport 53 -j ACCEPT
+# iptables -A FORWARD -i wg0 -d 192.168.x.x -p tcp --dport 53 -j ACCEPT
+# iptables -A FORWARD -i wg0 -d 192.168.x.x -p udp --dport 53 -j ACCEPT
+
 # Optional: Allow HTTP traffic (port 80)
 # iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 
